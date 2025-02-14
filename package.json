@@ -1,0 +1,14 @@
+{
+  "name": "discord-ban-bot",
+  "version": "1.0.0",
+  "description": "A bot that allows users to self ban ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js "
+  },
+  "author": "Ragav Srinivasan",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.18.0"
+  }
+}
