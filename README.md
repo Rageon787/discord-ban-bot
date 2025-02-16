@@ -26,3 +26,9 @@ In the case, a member wants to be unbanned before the completion of their ban pe
 (In the future, I hope to implement an annoying game to disincentivize unbanning)
 
 # Commands
+
+- `\ban timeblock <integer> <[y]ear(s) | [m]onth(s) | [d]ay(s) | [h]our(s) | [mi]nute(s)>`
+- `\ban staggered (ban time) (unban time)`
+- `\ban schedule <enter a discord stamp range>`
+- `\banlist`: Lists all members currently banned with the time remaining in their ban and the type of ban
+- `\ban-help`: helper menu
