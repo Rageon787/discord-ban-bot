@@ -1,3 +1,4 @@
 .env
 config.json
 playground.js
+*.db
