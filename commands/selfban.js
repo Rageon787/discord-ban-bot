@@ -5,6 +5,8 @@ const {
 } = require("discord.js");
 const { roleId } = require("../config.json");
 const interactionCreate = require("../events/interactionCreate");
+const { validate, timeValidate } = require("../utils/timeHandler");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("selfban")
@@ -41,26 +43,36 @@ module.exports = {
     ),
   async execute(interaction) {
     const subcommand = interaction.options.getSubcommand();
-    const durationArgs = interaction.options.getString();
-    console.log(subcommand);
     if (subcommand === "timeblock") {
-      // Perform input validation? is it the right format?
-      // parse the time string ("y mo d h m") -to ms
-      // Ban this user immediately and store the unban time in a database
-      await interaction.member.roles.add(roleId);
-      setTimeout(() => interaction.member.roles.remove(roleId), 5000);
-      await interaction.reply(
-        `${interaction.user} you're banned for ${durationArgs}`,
-      );
+      // Fetch the option string
+      const banDuration = interaction.options.getString("ban-duration");
+      const inMs = timeValidate(banDuration); // ban duration in ms
+      if (inMs != "") {
+        console.log(inMs);
+        interaction.member.roles.add(roleId);
+        setTimeout(() => {
+          interaction.member.roles.remove(roleId);
+        }, inMs);
+        await interaction.reply(
+          `${interaction.user} You've been banned for ${banDuration}`,
+        );
+      } else {
+        await interaction.reply(
+          `${interaction.user} please enter the duration in the right format!`,
+        );
+      }
     } else if (subcommand === "staggered") {
       // two string options: ban time and unban time?
+      const banDuration = interaction.options.getString("ban-duration");
+      const unbanDuration = interaction.options.getString("unban-duration");
       // perform input validation? is it in the expected format?
+      //
       // if no then send a message saying "Invalid time format"
       // else
       // parse everything into ms
       // Ban this user immediately and store the unban time in a database called Unbans
       // The next ban time will also be stored in the database called Bans
-      await interaction.member.roles.add(roleId);
+      interaction.member.roles.add(roleId);
       setTimeout(() => interaction.member.roles.remove(roleId), 5000);
       await interaction.reply(
         `${interaction.user} you're banned for ${durationArgs}`,

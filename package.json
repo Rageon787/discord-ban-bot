@@ -9,6 +9,7 @@
   "author": "Ragav Srinivasan",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "^14.18.0",
+    "timestring": "^7.0.0"
   }
 }
